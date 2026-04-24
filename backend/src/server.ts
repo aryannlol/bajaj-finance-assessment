@@ -1,5 +1,6 @@
 import cors from "cors";
 import express from "express";
+import path from "path";
 import { bfhlRouter } from "./infrastructure/api/routes.js";
 
 const app = express();
@@ -13,10 +14,19 @@ app.use(
 );
 app.use(express.json());
 
+// API routes
 app.use("/bfhl", bfhlRouter);
 
+// 🔥 Serve frontend build
+const __dirname = path.resolve();
+app.use(express.static(path.join(__dirname, "../frontend/dist")));
+
+app.get("*", (_req, res) => {
+  res.sendFile(path.join(__dirname, "../frontend/dist/index.html"));
+});
+
+// Error handler
 app.use((err: unknown, _req: express.Request, res: express.Response, _next: express.NextFunction) => {
-  // Keep a safe API contract even for unexpected runtime errors.
   res.status(500).json({
     is_success: false,
     message: "Unexpected server error",
@@ -25,7 +35,5 @@ app.use((err: unknown, _req: express.Request, res: express.Response, _next: expr
 });
 
 app.listen(PORT, "0.0.0.0", () => {
-  // eslint-disable-next-line no-console
   console.log(`Server running on port ${PORT}`);
 });
-
