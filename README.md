@@ -1,6 +1,8 @@
 # SRM Full Stack Challenge: Hierarchy Processor
 
 This project implements a full-stack solution for `POST /bfhl` using a domain-first TypeScript architecture.
+by Aryan Mandlik(RA2311003012259)
+   CSE-CORE
 
 ## Architecture
 
