@@ -42,7 +42,7 @@ const EXAMPLES: Array<{ label: string; value: string }> = [
     )
   }
 ];
-const API_BASE = import.meta.env.VITE_API_URL ?? "http://localhost:3000";
+const API_BASE = import.meta.env.VITE_API_URL ?? "";
 const LOADING_PHASES = [
   "Validating node relationships...",
   "Resolving duplicates and parent conflicts...",
